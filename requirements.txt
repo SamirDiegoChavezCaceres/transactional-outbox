@@ -1,0 +1,3 @@
+# One-command setup (run from the repo root):
+#   pip install -r requirements.txt
+-e .[dev]
