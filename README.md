@@ -7,6 +7,13 @@ problem, in a small, tested, dependency-free form (stdlib `sqlite3`).
 
 ![demo](assets/demo.gif)
 
+The demo (`scripts/demo.py`) runs in memory with no dependencies and walks a
+money transfer end to end: (1) one transaction writes a balance change and its
+event together, (2) an overdraft rolls back both, leaving no stray event, (3) a
+broker-down publish keeps the event `pending` instead of losing it, (4) the relay
+delivers it once the broker recovers and marks it `sent`, and (5) a duplicate
+delivery is handled only once by the idempotent consumer.
+
 ## The problem
 
 A service often has to do two things: change its database and tell another
